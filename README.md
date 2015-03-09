@@ -1,6 +1,15 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+The game starts upon page load. Initially the player has 3 lives.
 
-for self-checking their submission.
+Rules:
+Using the arrow keys the goal is to navigate the player over to the water without hitting a bug.
+If the player reach the water, 100 points are added to the score and the player is moved back to the initial position.
+If the player is hit by a bug, the player loose one life. When the player has 0 lives, the game is over.
+To restart the game, hit the enter key.
+
+Additional information:
+Everytime the player reach a 1000 points border (1000, 2000, 3000, ..) the speed of the bugs increase.
+The speed and position of the bugs will change to increase the difficulty.
+Everytime the player crosses a 4000 points border (4000, 8000, 12000, ..) the player earns one life. 
