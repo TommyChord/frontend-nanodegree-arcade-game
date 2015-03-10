@@ -1,3 +1,4 @@
+"use strict";
 // Enemies our player must avoid
 var Enemy = function() {
 	// The image/sprite for our enemies, this uses
@@ -13,7 +14,7 @@ var Enemy = function() {
 	// Sets the initial enemy speed
 	this.maxSpeed = 100;
 	this.speed = getRandom(this.maxSpeed, this.maxSpeed - 50);
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -41,12 +42,12 @@ Enemy.prototype.update = function(dt) {
 			player.reset();
 		}
 	}
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Define the player
 var Player = function(x, y) {
@@ -65,11 +66,11 @@ var Player = function(x, y) {
 	// Lock the player movement when it reaches the water.
 	// The user has to release the arrow key and press it again to start moving
 	this.locked = false;
-}
+};
 
 Player.prototype.update = function(dt) {
 	// Move player based on pressed key if not locked and lives left
-	if((this.lives > 0) && (this.locked == false)) {
+	if((this.lives > 0) && (this.locked === false)) {
 		switch (this.direction) {
 			case 'left':
 				if (this.x > 5) {
@@ -99,58 +100,58 @@ Player.prototype.update = function(dt) {
 			this.scores();
 			this.reset();
 		}
-}
+};
 
 // Handle the keyboard input
 Player.prototype.handleInput = function(key){
 	this.direction = (key) ? key : '';
 	// if this is a new game, reset speeds, lives and score
-	if((this.lives == 0) && (key == 'enter')){
+	if((this.lives === 0) && (key == 'enter')){
 		this.locked = false;
 		this.lives = 3;
 		this.score = 0;
 		setEnemyMaxSpeed(100);
 	}
-}
+};
 
 // Render the player and statistics
 Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-	if (this.lives == 0) {
+	if (this.lives === 0) {
 		drawText("Game Over", 80, 50, 280);
 		drawText("Hit Enter to play again!", 30, 90, 350);
 	}
 	// Update lives and score statistics
 	drawText("Lives: " + this.lives, 30, 380, 570);
 	drawText("Score: " + this.score, 30, 10, 570);
-}
+};
 
 // Subtract one life from the player
 Player.prototype.takeLife = function() {
 	if(this.lives > 0){
 		this.lives -= 1;
 	}
-}
+};
 
 // Add score
 Player.prototype.scores = function() {
 	this.score += 100;
 	// Each time the score passes a thousand points, increase enemy speed
-	if (this.score % 1000 == 0){
+	if (this.score % 1000 === 0){
 		setEnemyMaxSpeed();
 	}
 	// Each time the player reaches 4000 points, grant a new life to player
-	if(this.score % 4000 == 0){
+	if(this.score % 4000 === 0){
 		this.lives += 1;
 	}
-}
+};
 
 // Set the player to initial position
 Player.prototype.reset = function() {
 	this.x = 215;
 	this.y = 470;
 	this.locked = true;
-}
+};
 
 // Now instantiate your objects.
 var player = new Player(215, 470);
